@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GestorCalculosDebug_RegistroFinMetodo" xml:space="preserve">
+    <value>Finaliza la ejecución del método {0}. Fecha Fin: {1} {2}</value>
+  </data>
+  <data name="GestorCalculosDebug_RegistroInicioMetodo" xml:space="preserve">
+    <value>Inicia la ejecución del método {0}. Fecha Inicio: {1} {2}</value>
+  </data>
+  <data name="GestorCalculosError_BusquedaClaveValor" xml:space="preserve">
+    <value>No se encontró el valor de la clave {0} en la lista de valores iniciales. Nombre de la columna en archivo de configuración: {1}, Campo en la base de datos: {2}</value>
+  </data>
+  <data name="GestorCalculosError_Calculo" xml:space="preserve">
+    <value>Se presentó un problema en la ejecución del cálculo con el identificador {0}. El detalle del error es el siguiente: {1}</value>
+  </data>
+  <data name="GestorCalculosError_CalculoAEjecutar" xml:space="preserve">
+    <value>El cálculo con identificador {0} que intenta ejecutar, no existe en la configuración</value>
+  </data>
+  <data name="GestorCalculosError_CalculoNoPerteneceGrupo" xml:space="preserve">
+    <value>El cálculo con identificador {0}, no pertence al grupo {1} que intenta ejecutar</value>
+  </data>
+  <data name="GestorCalculosError_CodigoGenerico" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="GestorCalculosError_Configuracion" xml:space="preserve">
+    <value>Se presentó un error en el procesamiento del archivo de configuración</value>
+  </data>
+  <data name="GestorCalculosError_ConfiguracionInexistente" xml:space="preserve">
+    <value>La configuración especificada no existe</value>
+  </data>
+  <data name="GestorCalculosError_ConstanteParametro" xml:space="preserve">
+    <value>Se presentó un problema obteniendo el valor constante {0} desde el indice especificado de los parámetros, o la expresión para obtener los parámetros no esta bien formada. Favor verificar el archivo de configuración</value>
+  </data>
+  <data name="GestorCalculosError_ConstanteSubcadena" xml:space="preserve">
+    <value>Se presentó un problema obteniendo el valor constante desde la expresión de subcadena especificada. Favor verificar el archivo de configuración</value>
+  </data>
+  <data name="GestorCalculosError_DependenciaCalculo" xml:space="preserve">
+    <value>El cálculo {0} tiene definida una dependencia al cálculo {1} que no existe. El cálculo {0} no se ejecuta</value>
+  </data>
+  <data name="GestorCalculosError_DependenciaCalculoNoExitosa" xml:space="preserve">
+    <value>El cálculo {0} tiene definida una dependencia al cálculo {1}, y este no ha sido completado exitosamente. El cálculo {0} no se ejecuta</value>
+  </data>
+  <data name="GestorCalculosError_DependenciaGropoNoExiste" xml:space="preserve">
+    <value>El grupo {1} del cual depende el cálculo {0}, no existe</value>
+  </data>
+  <data name="GestorCalculosError_DependenciaGrupoNoExitosa" xml:space="preserve">
+    <value>El cálculo {0} tiene una dependencia al grupo {1}, el cual contiene el cálculo {2} que no ha sido completado exitosamente. El cálculo {0} no se ejecuta</value>
+  </data>
+  <data name="GestorCalculosError_DetalleTecnicoError" xml:space="preserve">
+    <value>Detalle técnico del error: {0}</value>
+  </data>
+  <data name="GestorCalculosError_ExcepcionEnFuente" xml:space="preserve">
+    <value>Problema presentado en la fuente de información {0}</value>
+  </data>
+  <data name="GestorCalculosError_ExcepcionNoControlada" xml:space="preserve">
+    <value>Se presentó una excepción no controlada en la ejecución del método {0}</value>
+  </data>
+  <data name="GestorCalculosError_ExcepcionProceso" xml:space="preserve">
+    <value>Se presentó la siguiente excepción en el proceso de cálculo: {0}. Para mayor detalle, favor verificar el archivo de Log del servicio</value>
+  </data>
+  <data name="GestorCalculosError_GrupoAEjecutar" xml:space="preserve">
+    <value>El grupo con identificador {0} que intenta ejecutar, no existe en la configuración</value>
+  </data>
+  <data name="GestorCalculosError_KeyRepetido" xml:space="preserve">
+    <value>El identificador {0}, ya se encuentra en el diccionario</value>
+  </data>
+  <data name="GestorCalculosError_MensajeValorConfiguracion" xml:space="preserve">
+    <value>La variable {0} no se encuentra en el archivo de configuración y es obligatoria</value>
+  </data>
+  <data name="GestorCalculosError_ProcesamientoAsincrono" xml:space="preserve">
+    <value>Problemas en la ejecución del proceso de cálculo asíncrono</value>
+  </data>
+  <data name="GestorCalculosError_ProcesamientoAsincronoCompletadoConError" xml:space="preserve">
+    <value>Se presentó un problema en el procesamiento asíncrono del cálculo. El detalle de la excepción es el siguiente: {0}</value>
+  </data>
+  <data name="GestorCalculosError_ProcesoNoExiste" xml:space="preserve">
+    <value>El proceso de cálculo especificado no existe</value>
+  </data>
+  <data name="GestorCalculosError_RepositorioInvalido" xml:space="preserve">
+    <value>El repositorio {0} no es válido. Revise que las consultas o procedimientos almacenados esten correctamente definidos</value>
+  </data>
+  <data name="GestorCalculosError_RepositorioSinDatos" xml:space="preserve">
+    <value>No se encontraron datos para la siguiente entrada del cálculo: {0}</value>
+  </data>
+  <data name="GestorCalculosError_ServicioNoEncontrado" xml:space="preserve">
+    <value>No se encontró el servicio {0} en el contenedor de instancias</value>
+  </data>
+  <data name="GestorCalculosError_ValidacionArchivo" xml:space="preserve">
+    <value>El archivo de configuración enviado no cumplió con la validación del esquema XSD</value>
+  </data>
+  <data name="GestorCalculosError_ValidacionEsquema" xml:space="preserve">
+    <value>[ErrorXSD] [Línea {1}, Posición {2}]: {0}</value>
+  </data>
+  <data name="GestorCalculosError_ValidacionInyeccionSQL" xml:space="preserve">
+    <value>El repositorio con identificador {0}, no paso la validación de la consulta SQL. Favor verifique la consulta e intentelo de nuevo</value>
+  </data>
+  <data name="GestorCalculosError_VariableFuente" xml:space="preserve">
+    <value>No se definio una fuente de información para la variable {0}</value>
+  </data>
+  <data name="GestorCalculosError_VariableInvalida" xml:space="preserve">
+    <value>La variable con identificador {0} es inválida. Debe ser del tipo Decimal</value>
+  </data>
+  <data name="GestorCalculosError_VariableNula" xml:space="preserve">
+    <value>La variable con identificador {0} es requerida y se encuentra nula sin un valor por defecto</value>
+  </data>
+  <data name="GestorCalculosError_VariableSemillaFuente" xml:space="preserve">
+    <value>No se definio una fuente de información para la variable semilla {0}</value>
+  </data>
+  <data name="GestorCalculosError_VariableSemillaInvalida" xml:space="preserve">
+    <value>El tipo de dato de la variable semilla {0}, es inválido. Recuerde que el tipo de dato de la variable semilla debe ser DictionaryString</value>
+  </data>
+  <data name="GestorCalculosInfo_FinProceso" xml:space="preserve">
+    <value>Finaliza el proceso '{0}'</value>
+  </data>
+  <data name="GestorCalculosInfo_InicioProceso" xml:space="preserve">
+    <value>Inicia el proceso '{0}'</value>
+  </data>
+  <data name="GestorCalculosInfo_ObtenerConfiguracionPorNombre" xml:space="preserve">
+    <value>Obteniendo la configuración '{0}'</value>
+  </data>
+  <data name="GestorCalculosInfo_ProcesandoCalculo" xml:space="preserve">
+    <value>Procesando el cálculo {0}...</value>
+  </data>
+  <data name="GestorCalculosInfo_ProcesoActivo" xml:space="preserve">
+    <value>El proceso de cálculo se encuentra activo</value>
+  </data>
+  <data name="GestorCalculosInfo_ProcesoCancelado" xml:space="preserve">
+    <value>El proceso de cálculo fue cancelado por el usuario</value>
+  </data>
+  <data name="GestorCalculosInfo_ProcesoCompletado" xml:space="preserve">
+    <value>El proceso de cálculo fue completado</value>
+  </data>
+  <data name="GestorCalculosInfo_ProcesoNoDisponible" xml:space="preserve">
+    <value>El proceso de cálculo especificado ya no se encuentra disponible en la caché</value>
+  </data>
+  <data name="GestorCalculosInfo_ResultadoCalculo" xml:space="preserve">
+    <value>Finalizó el proceso para el cálculo {0}. Resultado: {1}</value>
+  </data>
+  <data name="GestorCalculosInfo_ResultadoVariable" xml:space="preserve">
+    <value>El resultado de la variable {0} es: {1}</value>
+  </data>
+  <data name="GestorCalculosInfo_Separador" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="GestorCalculosInfo_ValidarConfiguracion" xml:space="preserve">
+    <value>Validando la configuración '{0}'</value>
+  </data>
+  <data name="GestorCalculosWarning_ValidacionEsquema" xml:space="preserve">
+    <value>[WarningXSD] [Línea {1}, Posición {2}]: {0}</value>
+  </data>
+</root>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<objects>
+  <description>An  example that demonstrates simple IoC features.</description>
+
+  <!-- Factory para el acceso a datos -->  
+  <object id="SQL" type="MVM.ProcessEngine.Core.DataAccess.GestorDatosSQL, MVM.ProcessEngine.Core" />
+
+  <!-- manager para manejo de la bitácora de mensajes -->
+  <object id="mensajesManager" type=" MVM.ProcessEngine.Plugin.TableStorageMessagesManager.TableStorageMessagesManager, MVM.ProcessEngine.Plugin">
+  </object>
+
+  <!-- Servicio que hospeda el proceso de cálculo -->
+  <object id="CalculoTarget" type="MVM.ProcessEngine.Core.CalculoService, MVM.ProcessEngine.Core">
+  </object>
+
+  <!-- Factory for External functions
+  <object id="externalFunction" type="MVM.ProcessEngine.Extension.EnergySuite.ContractConditionsExternalFunction, MVM.ProcessEngine.Extension" />-->
+  <object id="externalFunction" type="MVM.ProcessEngine.Extension.SIOIndicator.InitLoadExternalFunction, MVM.ProcessEngine.Extension" />
+
+	<!-- App Setting-->
+  <object id="appSetting" type="MVM.ProcessEngine.Common.AppSetting, MVM.ProcessEngine.Common" />
+  
+  
+</objects>

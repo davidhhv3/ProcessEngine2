@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuracion nombre="ResistenciaRealOHM" cultura="en-US" rutaArchivoVariablesGlobales="" fuenteConfiguracionInicial="RepoConfig" fuenteActualizacionVersion="RepoUpdate">
+  <fuentes>
+    <repositorios>
+      <repositorio id="RepoSemilla" nombre="ConsultaSemilla" nombreCadenaConexion="SIIMADRCDConnectionString"
+                   sql="SELECT DISTINCT CE.IdElemento,'' FROM Operacion.ConceptosElementos CE
+                        INNER JOIN Maestras.Medidores M ON M.IdMedidor = CE.IdElemento
+                        WHERE CE.IdConcepto IN ('IMPEBASE','RESISTPU')
+                        AND M.InicioVigencia &lt;= @pFechaInicial AND (M.FinVigencia IS NULL OR M.FinVigencia >= @pFechaFinal)">
+        <parametros>
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoSemillaInterna" nombre="Consulta Fecha-Hora" nombreCadenaConexion="SIIMADRCDConnectionString"
+                         sql="WITH cteFecha AS (
+                          SELECT CAST(@pFechaInicial AS DATETIME) AS Fecha
+                          UNION ALL
+                          SELECT DATEADD(DD, 1, Fecha)
+                            FROM cteFecha s
+                           WHERE DATEADD(DD, 1, Fecha) &lt;= CAST(@pFechaFinal AS DATETIME))
+                        , 
+                        ctePeriodo AS (
+                          SELECT @pPeriodoInicial AS Periodo
+                          UNION ALL
+                          SELECT (Periodo + 1)
+                            FROM ctePeriodo s
+                           WHERE (Periodo + 1) &lt;= @pPeriodoFinal)
+
+                        SELECT DISTINCT LEFT(CONVERT(VARCHAR, Fecha, 120), 10),Periodo 
+                          FROM cteFecha, ctePeriodo
+                          OPTION ( MaxRecursion 0 )">
+        <parametros>
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoInicial" valor="1" tipoDato="Integer" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoFinal" valor="24" tipoDato="Integer" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoIMPEBASE" nombre="Consulta Impedancia" nombreCadenaConexion="SIIMADRCDConnectionString"
+                   sql="SELECT Valor FROM Operacion.ConceptosElementos WHERE IdElemento = @pIdElemento
+                        AND FechaInicial &lt;= @pFecha AND (FechaFinal >= @pFecha OR FechaFinal IS NULL)
+                        AND PeriodoInicial &lt;= @pPeriodo AND PeriodoFinal >= @pPeriodo
+                        AND IdConcepto = 'IMPEBASE' AND Version = (SELECT MAX(Version) FROM Operacion.ConceptosElementos WHERE IdElemento = @pIdElemento
+                        AND FechaInicial &lt;= @pFecha AND (FechaFinal >= @pFecha OR FechaFinal IS NULL)
+                        AND PeriodoInicial &lt;= @pPeriodo AND PeriodoFinal >= @pPeriodo
+                        AND IdConcepto = 'IMPEBASE')">
+        <parametros>
+          <parametro nombre="Fecha" valor="[BUFFER(2)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="IdElemento" valor="[BUFFER(0)]" tipoDato="String" />
+          <parametro nombre="Periodo" valor="[BUFFER(3)]" tipoDato="Integer" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoIMPEBASEEntrada" nombre="Consulta Impedancia Entrada" nombreCadenaConexion="SIIMADRCDConnectionString"
+                   sql="SELECT  IdElemento,IdConcepto,FechaInicial,PeriodoInicial,FechaFinal,PeriodoFinal,Valor,Version
+ 				                 FROM Operacion.ConceptosElementos WHERE 
+                         FechaInicial &lt;= @pFechaInicial AND (FechaFinal >= @pFechaFinal OR FechaFinal IS NULL)
+                         AND PeriodoInicial &lt;= @pPeriodoInicial AND PeriodoFinal >= @pPeriodoFinal
+                         AND IdConcepto = 'IMPEBASE' AND Version = (SELECT MAX(Version) FROM Operacion.ConceptosElementos WHERE
+						             FechaInicial &lt;= @pFechaInicial AND (FechaFinal >= @pFechaFinal OR FechaFinal IS NULL)
+						             AND PeriodoInicial &lt;= @pPeriodoInicial AND PeriodoFinal >= @pPeriodoFinal
+						             AND IdConcepto = 'IMPEBASE')">
+        <parametros>
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoInicial" valor="1" tipoDato="Integer" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoFinal" valor="24" tipoDato="Integer" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoRESISTPU" nombre="Consulta Resistencia PU" nombreCadenaConexion="SIIMADRCDConnectionString"
+                   sql="SELECT Valor FROM Operacion.ConceptosElementos WHERE IdElemento = @pIdElemento
+                        AND FechaInicial &lt;= @pFecha AND (FechaFinal >= @pFecha OR FechaFinal IS NULL)
+                        AND PeriodoInicial &lt;= @pPeriodo AND PeriodoFinal >= @pPeriodo
+                        AND IdConcepto = 'RESISTPU' AND Version = (SELECT MAX(Version) FROM Operacion.ConceptosElementos WHERE IdElemento = @pIdElemento
+                        AND FechaInicial &lt;= @pFecha AND (FechaFinal >= @pFecha OR FechaFinal IS NULL)
+                        AND PeriodoInicial &lt;= @pPeriodo AND PeriodoFinal >= @pPeriodo
+                        AND IdConcepto = 'RESISTPU')">
+        <parametros>
+          <parametro nombre="Fecha" valor="[BUFFER(2)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="IdElemento" valor="[BUFFER(0)]" tipoDato="String" />
+          <parametro nombre="Periodo" valor="[BUFFER(3)]" tipoDato="Integer" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoRESISTPUEntrada" nombre="Consulta Resistencia PU" nombreCadenaConexion="SIIMADRCDConnectionString"
+               sql="SELECT  IdElemento,IdConcepto,FechaInicial,PeriodoInicial,FechaFinal,PeriodoFinal,Valor,Version
+   				              FROM Operacion.ConceptosElementos WHERE 
+                        FechaInicial &lt;= @pFechaInicial AND (FechaFinal >= @pFechaFinal OR FechaFinal IS NULL)
+                        AND PeriodoInicial &lt;= @pPeriodoInicial AND PeriodoFinal >= @pPeriodoFinal
+                        AND IdConcepto = 'RESISTPU' AND Version = (SELECT MAX(Version) FROM Operacion.ConceptosElementos WHERE
+						            FechaInicial &lt;= @pFechaInicial AND (FechaFinal >= @pFechaFinal OR FechaFinal IS NULL)
+						            AND PeriodoInicial &lt;= @pPeriodoInicial AND PeriodoFinal >= @pPeriodoFinal
+						            AND IdConcepto = 'RESISTPU')">
+        <parametros>
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoInicial" valor="1" tipoDato="Integer" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoFinal" valor="24" tipoDato="Integer" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoConceptoElemento" nombre="Insercion Concepto Elemento" nombreCadenaConexion="SIIMADRCDConnectionString"
+	             habilitarActualizacion="false" sql="[Operacion].[ConceptosElementos]" habilitarTransaccion="true">
+        <parametros>
+          <parametro nombre="IdElemento" valor="[BUFFER(0)]" tipoDato="String" />
+          <parametro nombre="IdConcepto" valor="[BUFFER(3)]" tipoDato="String" />
+          <parametro nombre="Valor" valor="[BUFFER(2)]" tipoDato="Decimal" />
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTime" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoInicial" valor="1" tipoDato="Integer" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTime" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoFinal" valor="24" tipoDato="Integer" />
+          <parametro nombre="Version" valor="[PARAMETRO(1)]" tipoDato="Integer" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoConceptoGeneracion" nombre="Actualización Concepto Generacion" nombreCadenaConexion="SIIMADRCDConnectionString" 
+                   habilitarActualizacion="false" sql="[Operacion].[ConceptosGeneracion]" habilitarTransaccion="true">
+        <parametros>
+          <parametro nombre="Fecha" valor="[BUFFER(2)]" tipoDato="DateTime" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="Version" valor="[PARAMETRO(1)]" tipoDato="Integer" />
+          <parametro nombre="IdTipoProg" valor="Dia" tipoDato="String" />
+          <parametro nombre="IdElemento" valor="[BUFFER(0)]" tipoDato="String" />
+          <parametro nombre="IdConcepto" valor="[BUFFER(5)]" tipoDato="String" />
+          <parametro nombre="Periodo" valor="[BUFFER(3)]" tipoDato="Integer" />
+          <parametro nombre="Valor" valor="[BUFFER(4)]" tipoDato="Decimal" permitirNulos="true" />
+          <parametro nombre="TipoProc" valor="DMAX" tipoDato="String" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoConfig" nombre="Configuracion Inicial" nombreCadenaConexion="SIIMADRCDConnectionString" habilitarActualizacion="false"
+                   nombreProcedimiento="[Operacion].[ConfigInicialDmax]" habilitarTransaccion="true">
+        <parametros>
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoInicial" valor="1" tipoDato="Integer" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoFinal" valor="24" tipoDato="Integer" />
+          <parametro nombre="Version" valor="[PARAMETRO(1)]" tipoDato="Integer" />
+          <parametro nombre="Conceptos" valor="[PARAMETRO(6)]" tipoDato="String" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoUpdate" nombre="Actualizacion Version" nombreCadenaConexion="SIIMADRCDConnectionString" habilitarActualizacion="false"
+                   nombreProcedimiento="[Operacion].[UpdateVersionDmax]" habilitarTransaccion="true">
+        <parametros>
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoInicial" valor="1" tipoDato="Integer" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoFinal" valor="24" tipoDato="Integer" />
+          <parametro nombre="Version" valor="[PARAMETRO(1)]" tipoDato="Integer" />
+          <parametro nombre="Conceptos" valor="[PARAMETRO(6)]" tipoDato="String" />
+        </parametros>
+      </repositorio>
+      <repositorio id="RepoRESREOHMSalida" nombre="Consulta Salida RESREOHM" nombreCadenaConexion="SIIMADRCDConnectionString"
+                   sql="SELECT *
+				                FROM [Operacion].[ConceptosGeneracion]
+				                WHERE 
+					              Fecha >= @pFechaInicial AND 
+					              (Fecha &lt;= @pFechaFinal OR Fecha IS NULL) AND 
+					              Version = @pVersion AND
+					              IdTipoProg = 'Dia' AND  
+					              IdConcepto = 'RESREOHM' AND
+					              Periodo >= @pPeriodoInicial AND
+					              Periodo &lt;= @pPeriodoFinal AND
+					              TipoProc = 'DMAX'">
+        <parametros>
+          <parametro nombre="FechaInicial" valor="[PARAMETRO(0)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoInicial" valor="1" tipoDato="Integer" />
+          <parametro nombre="FechaFinal" valor="[PARAMETRO(8)]" tipoDato="DateTimeString" formato="yyyyMMdd HH:mm:ss" />
+          <parametro nombre="PeriodoFinal" valor="24" tipoDato="Integer" />
+          <parametro nombre="Version" valor="[PARAMETRO(1)]" tipoDato="Integer" />
+        </parametros>
+      </repositorio>
+    </repositorios>
+  </fuentes>
+  <calculos>
+    <calculo id="RESREOHM" nombre="Resistencia real OHM" formula="{RESREOHM}" ejecutar="false" orden="0" bulkCopy="Calculo"	fuenteConsultaSalida="RepoRESREOHMSalida">
+      <variables>
+        <variable id="Semilla" nombre="SMC de generación con valores de impedancia y resistencia PU registrados en el sistema" fuente="RepoSemilla" tipoDato="DictionaryString" tipoVariable="Semilla" ejecutarCalculoPorIteracion="false" ejecutarSemillaEnParalelo="true" />
+        <variable id="SemillaInterna" nombre="SemillaInterna" fuente="RepoSemillaInterna" tipoDato="DictionaryString" tipoVariable="SemillaInterna" ejecutarCalculoPorIteracion="true" habilitarReporte="false" />
+        <variable id="IMPEBASE" nombre="Impedancia" fuente="RepoIMPEBASE" tipoDato="Decimal" direccion="Entrada" tipoVariable="Interna" fuenteConsultaEntrada="RepoIMPEBASEEntrada" />
+        <variable id="RESISTPU" nombre="Resistencia PU" fuente="RepoRESISTPU" tipoDato="Decimal" direccion="Entrada" tipoVariable="Interna" fuenteConsultaEntrada="RepoRESISTPUEntrada" />
+        <variable id="RESREOHM" nombre="Resistencia real OHM" formulaInterna="{IMPEBASE}*{RESISTPU}" fuente="RepoConceptoGeneracion" tipoDato="Decimal" direccion="Salida" tipoVariable="Local" almacenar="true" permitirNulos="true" />
+      </variables>
+    </calculo>
+  </calculos>
+</configuracion>

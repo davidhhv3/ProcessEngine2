@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>Declaracion e integracion de servicios de infraestructura.</description>
+
+  <!-- AOP Advice para la gestión de excepciones y el manejo del logging -->
+  <object id="MethodInterceptor" type="OC.GestorCalculos.Common.AOP.GestorCalculosMethodInterceptor, OC.GestorCalculos.Common" />
+
+  <!-- Configuración localización mensajes -->
+  <object id="messageSource" type="Spring.Context.Support.ResourceSetMessageSource, Spring.Core">
+    <property name="ResourceManagers">
+      <list>
+        <value>Resources.Messages, App_GlobalResources</value>
+      </list>
+    </property>
+  </object>
+
+</objects>

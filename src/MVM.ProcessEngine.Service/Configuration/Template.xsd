@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ProveedorType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+      <xs:enumeration value="SQL" />
+      <xs:enumeration value="Oracle" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipoDatoType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+      <xs:enumeration value="Object" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="Integer" />
+      <xs:enumeration value="Decimal" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="DateTimeString" />
+      <xs:enumeration value="Boolean" />
+      <xs:enumeration value="DictionaryString" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DireccionType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+      <xs:enumeration value="Ninguno" />
+      <xs:enumeration value="Entrada" />
+      <xs:enumeration value="Salida" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipoRedondeoType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+      <xs:enumeration value="Defecto" />
+      <xs:enumeration value="Mayor" />
+      <xs:enumeration value="Menor" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipoVariableType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+      <xs:enumeration value="Ninguno" />
+      <xs:enumeration value="Global" />
+      <xs:enumeration value="Local" />
+      <xs:enumeration value="Semilla" />
+      <xs:enumeration value="Interna" />
+      <xs:enumeration value="SemillaInterna" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FuncionType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+      <xs:enumeration value="Ninguno" />
+      <xs:enumeration value="Sumar" />
+      <xs:enumeration value="Promedio" />
+      <xs:enumeration value="Maximo" />
+      <xs:enumeration value="Minimo" />
+      <xs:enumeration value="DiasMes" />
+      <xs:enumeration value="DiasMesPeriodos" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BulkCopyType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100" />
+      <xs:enumeration value="Ninguno" />
+      <xs:enumeration value="Calculo" />
+      <xs:enumeration value="Semilla" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="configuracion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="fuentes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="servicios" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="servicio" maxOccurs="unbounded">                      
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="parametros" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="parametro" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="nombre" use="required">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="valor" use="required">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "500"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="defecto" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "500"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="tipoDato" use="optional" type="TipoDatoType" default="String" />
+                                    <xs:attribute name="direccion" use="optional" type="DireccionType" default="Entrada" />
+                                    <xs:attribute name="formato" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="digitosFlotantes" type="xs:string" use="optional" />
+                                    <xs:attribute name="tipoRedondeo" type="TipoRedondeoType" use="optional" default="Defecto" />
+                                    <xs:attribute name="tamano" type="xs:integer" use="optional" default="0"/>
+                                    <xs:attribute name="permitirNulos" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "50"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="nombre" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "100"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="wsdl" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "500"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="metodo" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "100"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="repositorios" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="repositorio" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="parametros" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="parametro" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute name="nombre" use="required">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="valor" use="required">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "500"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="defecto" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "500"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="tipoDato" use="optional" type="TipoDatoType" default="String" />
+                                    <xs:attribute name="direccion" use="optional" type="DireccionType" default="Entrada" />
+                                    <xs:attribute name="formato" use="optional">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:maxLength value = "100"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="digitosFlotantes" type="xs:string" use="optional" />
+                                    <xs:attribute name="tipoRedondeo" type="TipoRedondeoType" use="optional" default="Defecto" />
+                                    <xs:attribute name="tamano" type="xs:integer" use="optional" default="0"/>
+                                    <xs:attribute name="permitirNulos" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element type="xs:string" name="Tipo" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:minLength value = "3" />
+                              <xs:maxLength value = "50"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="nombre" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "100"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="nombreCadenaConexion" use="required">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:minLength value = "1"/>
+                              <xs:maxLength value = "100"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="sql" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "8000"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="nombreProcedimiento" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "100"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="habilitarActualizacion" use="optional" default="false">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "10"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="sqlActualizacion" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "8000"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="nombreProcedimientoActualizacion" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "100"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="habilitarTransaccion" use="optional" default="false">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:maxLength value = "10"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="fuenteMemoria" use="optional">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:minLength value = "3" />
+                              <xs:maxLength value = "50"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+
+                       
+                      
+                      </xs:complexType>
+                  
+                     
+               
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="grupos" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="grupo" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="id" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value="1" />
+                        <xs:maxLength value = "50"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="nombre" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value="1" />
+                        <xs:maxLength value = "100"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="orden" type="xs:integer" use="optional" default="0"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="calculos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="calculo" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="variables" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="variable" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="equivalencias" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="equivalencia" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:attribute name="valorOriginal" type="xs:string" use="required" />
+                                          <xs:attribute name="valorNuevo" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="id" use="required">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value = "50"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="nombre" use="required">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value = "100"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="valorDefecto" type="xs:string" use="optional" />
+                              <xs:attribute name="constante" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value = "500"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="fuente" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value = "50"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="fuenteConsultaEntrada" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value = "50"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="tipoDato" use="optional" type="TipoDatoType" default="String" />
+                              <xs:attribute name="direccion" use="optional" type="DireccionType" default="Entrada" />
+                              <xs:attribute name="digitosFlotantes" type="xs:string" use="optional" />
+                              <xs:attribute name="tipoRedondeo" type="TipoRedondeoType" use="optional" default="Defecto" />
+                              <xs:attribute name="formato" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value = "100"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="almacenar" type="xs:string" use="optional" default="false"/>
+                              <xs:attribute name="tipoVariable" type="TipoVariableType" use="optional" default="Ninguno" />
+                              <xs:attribute name="funcion" use="optional" type="FuncionType" default="Ninguno" />
+                              <xs:attribute name="permitirNulos" type="xs:string" use="optional" default="false" />
+                              <xs:attribute name="ejecutarCalculoPorIteracion" type="xs:string" use="optional" default="false"/>
+                              <xs:attribute name="formulaInterna" use="optional">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:maxLength value = "8000"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="ejecutarSemillaEnParalelo" type="xs:string" use="optional" default="false" />
+                              <xs:attribute name="habilitarReporte" type="xs:string" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value = "1"/>
+                        <xs:maxLength value = "50"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="nombre" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value = "200"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="formula" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value = "1"/>
+                        <xs:maxLength value = "8000"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="idDependencia" use="optional">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value = "50"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="idDependenciaGrupo" use="optional">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value = "50"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="idGrupo" use="optional">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value = "50"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="orden" type="xs:integer" use="optional" default="0" />
+                  <xs:attribute name="ejecutar" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value = "1"/>
+                        <xs:maxLength value = "100"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="bulkCopy" use="optional" type="BulkCopyType" default="Ninguno" />
+                  <xs:attribute name="fuenteConsultaSalida" use="optional">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:minLength value = "3" />
+                        <xs:maxLength value = "50"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="nombre" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value = "100"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="cultura" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value = "5"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="rutaArchivoVariablesGlobales" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value = "500"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="proveedor" use="optional" type="ProveedorType" default="SQL" />
+      <xs:attribute name="ejecutarCalculosEnParalelo" type="xs:string" use="optional" default="false"/>
+      <xs:attribute name="fuenteConfiguracionInicial" type="xs:string" use="optional" />
+      <xs:attribute name="fuenteActualizacionVersion" type="xs:string" use="optional" />
+      <xs:attribute name="fuenteVersionEntradas" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

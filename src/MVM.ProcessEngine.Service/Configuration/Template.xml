@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- configuracion: representa un archivo de configuración de cálculos. [Requerido: SI] -->
+<!-- ATRIBUTOS
+  nombre: nombre de la configuración.  [Requerido:SI][Longitud:100]
+  cultura: cultura por defecto del archivo. [Requerido:NO][Longitud:5]
+  rutaArchivoVariablesGlobales: ruta del archivo donde se encontraban definidas variables globales de la aplicación.  [Requerido:NO][Longitud:500]
+  proveedor: proveedor de acceso a datos en los repositorios.  [Requerido:NO][Longitud:100][Defecto:SQL]
+  ejecutarCalculosEnParalelo: indica si se pueden ejecutar los cálculos de este archivo en paralelo. [Requerido: NO][Defecto: false]
+  [POSIBLES VALORES:
+    *true
+    *false
+  ]
+  fuenteConfiguracionInicial: Identificador de la fuente que se encargará de ejecutar la configuración inicial [Requerido: NO][Longitud:50]
+-->
+<configuracion nombre="" cultura="" rutaArchivoVariablesGlobales="" proveedor="SQL" ejecutarCalculosEnParalelo="" fuenteConfiguracionInicial="">
+  <!-- fuentes: representa las fuentes de información. [Requerido:NO] -->
+  <fuentes>
+    <!-- servicios: representa la lista de fuentes de información de servicios. [Requerido:NO] -->
+    <servicios>
+      <!-- servicio: representa la fuente de información de un servicio web. [Requerido:SI] -->
+      <!-- ATRIBUTOS:
+        id: identificador del servicio. [Requerido:SI][Longitud:50]
+        nombre: nombre del servicio. [Requerido:SI][Longitud:100]
+        wsdl: dirección wsdl del servicio. [Requerido:SI][Longitud:500]
+        método: método o operación a consumir del servicio. [Requerido:SI][Longitud:100]
+        -->
+      <servicio id="" nombre="" wsdl="" metodo="">
+        <!-- parametros: representa los parámetros de entrada y salida del servicio. [Requerido:NO] -->
+        <parametros>
+          <!-- parametro: representa un parámetro del servicio. [Requerido:SI] -->
+          <!-- ATRIBUTOS: 
+            nombre: nombre del paráemtro. [Requerido:SI][Longitud:100]
+            valor: establece el valor del parámetro. Se puede una constante o utilizar valores por defectos que provienen de constantes del sistemas. [Requerido:SI][Longitud:500]
+            [POSIBLES VALORES:
+              * [FECHA] - Fecha actual, ingresada en el formato especificado en la configuración
+              * [CONFIGURACION] - Nombre de la configuración utilizada
+              * [SUBCADENA([x],a,b)] - En donde 'x' es el nombre de una de las otras expresiones admitidas
+                                    en las constantes, 'a' es la posición inicial del valor original, y 'b' la longitud
+                                    de la cadena a recortar. Por ejemplo, si la expresión es [HOJA],
+                                    el nombre de la hoja es 'ABCDEFGHIJK' y en la equivalencia se usa [SUBCADENA(2,3)], 
+                                    el resultado será 'CDE'
+              * [PARAMETRO(x)] - En donde 'x' es la posición en el orden en el que fueron enviados los parámetros al momento de ejecutar los procesos de cálculo.
+              * [BUFFER(x)] - Constante que permite obtener un valor desde un almacenamiento temporal de salida que se tiene para variables del cálculo, 
+              en donde 'x' representa la posición en el orden en el que fueron enviados los parámetros al almacenamiento temporal o Buffer.
+                [REMARKS:
+                Se utiliza principalmente para enviar valores resultantes del cálculo, que se requieran almacenar en la base de datos, como el contrato o el punto de suministro.
+                Claridad: 
+                Cuando no es semilla
+                BUFFER(0): Resultado del cálculo
+                BUFFER(1): Concepto
+                Cuando es semilla
+                BUFFER(0): IDELEMENTO
+                BUFFER(1): IDCONTRATO
+                BUFFER(2): Resultado del cálculo
+                BUFFER(3): Concepto
+                ]
+            ]
+            defecto: establece un valor por defecto en caso de que el valor original sea nulo. [Requerido:NO][Longitud:500]
+            tipoDato: establece el tipo de dato del parámetro. [Requerido:NO][Longitud:100][Defecto: String]
+            [POSIBLES VALORES:
+              *String
+              *Integer
+              *Decimal
+              *DateTime
+              *DateTimeString
+              *Boolean
+              *ListString
+              *DictionaryStringDecimal
+            ]
+            dirección: establece la dirección del parámetro. [Requerido:NO][Longitud:100][Defecto: Entrada]
+            [POSIBLES VALORES:
+              *Entrada
+              *Salida
+            ]
+            formato: formato a utilizar en la conversión. Aplica para cadena de caracteres, especialmente para fechas. [Requerido:NO][Longitud:100]
+            [EJEMPLO:
+              YYYYMMDD HH:mm:SS
+            ]
+            digitosFlotantes: indica el número de dígitos flotantes a establecer en un tipo de dato decimal. [Requerido:NO]
+            tipoRedondeo: indica el tipo de redondeo que se aplica en un tipo de dato decimal. [Requerido:NO][Defecto: Defecto]
+            [POSIBLES VALORES:
+              *Defecto
+              *Mayor
+              *Menor]
+            tamano: Indica el tamaño del parámetro para los tipos de salida [Requerido: NO][Default: 0]
+            [REMARKS: Aplica principalmente para parámetros de almacenamiento]
+            permitirNulos: Indica si el parámetro permite nulos [Requerido:NO]
+            [REMARKS: Aplica principalmente para parámetros de almacenamiento]
+            -->
+          <parametro nombre="" valor="" defecto="" tipoDato="String" direccion="Entrada" formato="" digitosFlotantes="" tipoRedondeo="Defecto" tamano="0" permitirNulos="" />
+        </parametros>
+      </servicio>
+    </servicios>
+    <!-- repositorios: representa la lista de fuentes de información de repositorios. [Requerido:NO] -->
+    <repositorios>
+      <!-- repositorio: representa la fuente de información de un repositorio de base de datos. [Requerido:SI] -->
+      <!-- ATRIBUTOS:
+        id: identificador del repositorio. [Requerido:SI][Longitud:50]
+        nombre: nombre del repositorio. [Requerido:SI][Longitud:100]
+        nombreCadenaConexion: nombre de la cadena de conexión del repositorio registrada en el contexto del servicio de cálculos. [Requerido:SI][Longitud:100]
+        sql: consulta SQL a ejecutar en el repositorio. Se valida SQL INJECTION. [Requerido:NO][Longitud:8000]
+        [EJEMPLOS:
+          SELECT Valor FROM Operacion.ConceptosSistema WHERE Fecha >= @pFechaInicial AND Fecha 0x3c= @pFechaFinal AND IdConcepto = 'CMPPBR'
+        ]
+        [REMARKS:
+          Los valores con el prefijo @p (para SQL) y :p (para Oracle), hacen referencia a parámetros definidos en la lista de parámetros
+          Por ejemplo, el nombre del parámetro para un valor en la consulta definido como @pFecha, es: Fecha
+        ]
+        nombreProcedimiento: indica el nombre del procedimiento almacenado a utilizar. En caso de estar definido un valor en el parámetro sql, este toma prioridad. [Requerido:NO][Longitud:100]
+        habilitarActualizacion: indica si se habilita o no la actualización en caso que la consulta arroje que existe el registro. [Requerido:NO][Longitud:10][Defecto: false]
+        [POSIBLES VALORES:
+          *true
+          *false
+        ]
+        sqlActualizacion: consulta SQL en caso de actualización que se debe ejecutar en el repositorio. Se valida SQL INJECTION. [Requerido:NO][Longitud:8000]
+        [EJEMPLOS:
+          UPDATE [Operacion].[ConceptosTransaccionesEconomicas] SET [Fecha] = @pFecha,[Version] = @pVersion,[IdTipoProg] = @pIdTipoProg,[IdElemento] = @pIdElemento,[IdConcepto] = @pIdConcepto
+                    ,[Periodo] = @pPeriodo,[Valor] = @pValor,[IdContrato] = @pIdContrato
+                    WHERE [Fecha] >= @pFecha AND [Version] = @pVersion AND [IdTipoProg] = @pIdTipoProg 
+	                    AND [IdElemento] = @pIdElemento AND [IdConcepto] = @pIdConcepto AND [Periodo] = @pPeriodo
+        ]
+        [REMARKS:
+          Los valores con el prefijo @p (para SQL) y :p (para Oracle), hacen referencia a parámetros definidos en la lista de parámetros
+          Por ejemplo, el nombre del parámetro para un valor en la consulta definido como @pFecha, es: Fecha
+        ]
+        nombreProcedimientoActualizacion: indica el nombre del procedimiento almacenado a utilizar. En caso de estar definido un valor en el parámetro sqlActualización, este toma prioridad. [Requerido:NO][Longitud:100]
+        habilitarTransaccion: indica si la operación se debe hacer en el contexto de una transacción. [Requerido:NO][Longitud:10][Defecto: false]
+        [POSIBLES VALORES:
+          *true
+          *false
+        ]
+        -->
+      <repositorio id="repo1" nombre="" nombreCadenaConexion="OCConnectionString" sql="" nombreProcedimiento=""  habilitarActualizacion="" sqlActualizacion=""
+                   nombreProcedimientoActualizacion="" habilitarTransaccion="">
+        <!-- parametros: representa los parámetros de entrada y salida del servicio. [Requerido:NO] -->
+        <parametros>
+          <!-- Ver estructura sección arriba -->
+          <parametro nombre="" valor="" tipoDato="String" direccion="Entrada" formato="" digitosFlotantes="" tipoRedondeo="Defecto" tamano="0" permitirNulos="" />
+        </parametros>
+      </repositorio>
+    </repositorios>
+    <!-- archivos: representa la lista de fuentes de información de archivos. [Requerido:NO] [ACTUALMENTE NO SOPORTADA] -->
+    <!--<archivos>
+      -->
+    <!-- archivo: representa la fuente de información de un archivo. [Requerido:SI] -->
+    <!--
+      -->
+    <!--ATRIBUTOS:
+        id: identificador de la fuente archivo. [Requerido:SI][Longitud:50]
+        nombre: nombre del archivo. [Requerido:SI][Longitud:100]
+        tipo: Tipo del archivo. [Requerido:NO][Longitud:100][Defecto: Excel]
+        ruta: ruta del archivo. [Requerido:SI][Longitud:500]
+      -->
+    <!--
+      <archivo id="" nombre="" tipo="" ruta="">
+        <parametros>
+          -->
+    <!-- Ver estructura sección arriba -->
+    <!--
+          <parametro nombre="" valor="" tipoDato="" direccion="" formato="" digitosFlotantes="" tipoRedondeo="" />
+        </parametros>
+      </archivo>
+    </archivos>-->
+  </fuentes>
+  <!-- grupos: representa la lista de grupos que permiten agrupar cada uno de los cálculos. [Requerido:NO] -->
+  <grupos>
+    <!-- grupo: representa un grupo de cálculos. [Requerido:SI] -->
+    <!--ATRIBUTOS:
+        id: identificador del grupo. [Requerido:SI][Longitud:50]
+        nombre: nombre del grupo. [Requerido:SI][Longitud:100]
+        orden: el orden de ejecución de los grupos. [Requerido: NO][Defecto: 0]
+      -->
+    <grupo id="gr1" nombre="grupo1" orden="0" />
+  </grupos>
+  <!-- calculos: representa la lista de cálculos que componen un archivo de configuración. [Requerido:SI] -->
+  <calculos>
+    <!-- calculo: representa un cálculo en el archivo de configuración. [Requerido:SI] -->
+    <!--ATRIBUTOS:
+        id: identificador del cálculo. [Requerido:SI][Longitud:50]
+        nombre: nombre del cálculo. [Requerido:SI][Longitud:200]
+        formula: indica la fórmula del cálculo. [Requerido:SI][Longitud:8000]
+        [EJEMPLO:
+          {PREFACPR}={CMPPBR}*{FACNODCP}+{var1}
+        ]
+        [REMARKS:
+          Los valores encerrados en llaves, representa variables definidas en la lista de variables de cada cálculo
+        ]
+        idDependencia: identificador del cálculo al que depende el cálculo actual. [Requerido:NO][Longitud:50]
+        idDependenciaGrupo: identificador del grupo al que depende el cálculo actual. [Requerido:NO][Longitud:50]
+        [REMARKS:
+          Tiene prioridad el atributo idDependencia sobre idDependenciaGrupo
+        ]
+        idGrupo: identificador del grupo al que pertenece el cálculo. [Requerido:NO][Longitud:50]
+        [REMARKS:
+          Debe corresponeder a uno de los grupos registrados en el elemento grupos de este archivo de configuración
+        ]
+        orden: permite establecer un orden de ejecución para los cálculos ya sea en un grupo o independientes. [Requerido:NO][Defecto:0]
+        ejecutar: indica si el cálculo se debe ejecutar o no. [Requerido:true][Defecto:true]
+      -->
+    <calculo id="calculo1" nombre="" formula="2*3" idDependencia="" idDependenciaGrupo="" idGrupo="" orden="0" ejecutar="true">
+      <!-- variables: representa las variables de entrada entrada y salida del cálculo. [Requerido:NO] -->
+      <variables>
+        <!-- variable: representa una variable en el cálculo. [Requerido:SI] -->
+        <!--ATRIBUTOS:
+            id: identificador de la variable. [Requerido:SI][Longitud:50]
+            nombre: nombre de la variable. [Requerido:SI][Longitud:100]
+            valorDefecto: valor por defecto a ingresar en caso de estar nulo el campo. [Requerido: NO]
+            constante: permite establecer un valor constante. [Requerido:NO][Longitud:500]
+            [POSIBLES VALORES:
+              * [FECHA] - Fecha actual, ingresada en el formato especificado en la configuración
+              * [CONFIGURACION] - Nombre de la configuración utilizada
+              * [SUBCADENA([x],a,b)] - En donde 'x' es el nombre de una de las otras expresiones admitidas
+                                    en las constantes, 'a' es la posición inicial del valor original, y 'b' la longitud
+                                    de la cadena a recortar. Por ejemplo, si la expresión es [HOJA],
+                                    el nombre de la hoja es 'ABCDEFGHIJK' y en la equivalencia se usa [SUBCADENA(2,3)], 
+                                    el resultado será 'CDE'
+              * [PARAMETRO(x)] - En donde 'x' es la posición en el orden en el que fueron enviados los parámetros al momento de ejecutar los procesos de cálculo.
+              * [BUFFER(x)] - Constante que permite obtener un valor desde un almacenamiento temporal de salida que se tiene para variables del cálculo, 
+              en donde 'x' representa la posición en el orden en el que fueron enviados los parámetros al almacenamiento temporal o Buffer.
+                ["BUFFER" REMARKS:
+                Se utiliza principalmente para enviar valores resultantes del cálculo, que se requieran almacenar en la base de datos, como el contrato o el punto de suministro.
+                ]
+            ]
+            fuente: identificador de la fuente de origen o destino de la variable. [Requerido: NO][Longitud: 50]
+            [REMARKS:
+            Debe corresponeder a uno de los repositorios o servicios registrados en el elemento fuentes del archivo de configuración
+            ]
+            tipoDato: establece el tipo de dato de la variable. [Requerido:NO][Longitud:100][Defecto: String]
+            [POSIBLES VALORES:
+              *String
+              *Integer
+              *Decimal
+              *DateTime
+              *DateTimeString
+              *Boolean
+              *ListString
+              *DictionaryStringDecimal
+            ]
+            dirección: establece la dirección de la variable. [Requerido:NO][Longitud:100][Defecto: Entrada]
+            [POSIBLES VALORES:
+              *Entrada
+              *Salida
+            ]
+            digitosFlotantes: indica el número de dígitos flotantes a establecer en un tipo de dato decimal. [Requerido:NO]
+            tipoRedondeo: indica el tipo de redondeo que se aplica en un tipo de dato decimal. [Requerido:NO][Defecto: Defecto]
+            [POSIBLES VALORES:
+              *Defecto
+              *Mayor
+              *Menor]
+            formato: formato a utilizar en la conversión. Aplica para cadena de caracteres, especialmente para fechas. [Requerido:NO][Longitud:100]
+            [EJEMPLO:
+              YYYYMMDD HH:mm:SS
+            ]
+            almacenar: indica si la variable se debe almacenar en la fuente asignada. [Requerido: NO][Defecto: false]
+            tipoVariable: indica el tipo de variable del cálculo. [Requerido: NO][Defecto: Ninguno]
+            [POSIBLES VALORES:
+              *Ninguno
+              *Local
+              *Global
+              *Semilla]
+            [REMARKS:
+              Cuando el valor es Global y se ejecutan varias iteraciones de cálculo, se consulta la variable solo una vez.
+              Cuando el valor es Semilla, el sistema utiliza esta variable para efectuar el cálculo n veces acorde al número de elementos que retorne esta variable. Este valor solo puede ser definido para una sola variable. En caso de que se defina en varias, se tomará la primera.
+            ]
+            funcion: indica la función que se debe ejecutar sobre esa variable en un cálculo. [Requerido: NO][Longitud: 100]
+            [POSIBLES VALORES:
+              *Sumar
+              *Promedio
+              *Maximo
+              *Minimo
+              ]
+            [REMARKS:
+              
+            ]
+            permitirNulos: indica si la variable permite nulos. [Requerido: NO][Defecto: false]
+            [POSIBLES VALORES:
+              *true
+              *false
+            ]
+            ejecutarCalculoPorIteracion: indica si la variable semilla se debe ejecutar en cada iteración. [Requerido: NO][Defecto: false]
+            [POSIBLES VALORES:
+              *true
+              *false
+            ]
+            formulaInterna: En caso de evaluar subexpresiones con semillas internas, se puede adicionar la formula en este campo. [Requerido: NO][Defecto: false]
+            ejecutarSemillaEnParalelo: indica si cada semilla se debe ejecutar en paralelo para las iteraciones. [Requerido: NO][Defecto: false]
+            [POSIBLES VALORES:
+              *true
+              *false
+            ]
+        -->
+        <variable id="" nombre="" valorDefecto="" constante="" fuente="" tipoDato="String" direccion="Salida" digitosFlotantes="" tipoRedondeo="Defecto" formato="" almacenar=""
+                  tipoVariable="Ninguno" funcion="Ninguno" permitirNulos="" ejecutarCalculoPorIteracion="" formulaInterna="" ejecutarSemillaEnParalelo="" habilitarReporte="">
+          <!-- equivalencias: representa las equivalencias de la variable. [Requerido:NO] -->
+          <equivalencias>
+            <!-- equivalencia: representa una equivalencia que permite cambiar un valor viejo por uno nuevo. [Requerido:SI] -->
+            <!--ATRIBUTOS:
+              valorOriginal: indica el valor original a buscar. [Requerido: Si]
+              valorNuevo: indica el nuevo valor a almacenar. Se pueden adicionar las constantes conocidas. [Requerido: Si]
+              [POSIBLES VALORES:
+              * [FECHA] - Fecha actual, ingresada en el formato especificado en la configuración
+              * [CONFIGURACION] - Nombre de la configuración utilizada
+              * [SUBCADENA([x],a,b)] - En donde 'x' es el nombre de una de las otras expresiones admitidas
+                                    en las constantes, 'a' es la posición inicial del valor original, y 'b' la longitud
+                                    de la cadena a recortar. Por ejemplo, si la expresión es [HOJA],
+                                    el nombre de la hoja es 'ABCDEFGHIJK' y en la equivalencia se usa [SUBCADENA(2,3)], 
+                                    el resultado será 'CDE'
+              * [PARAMETRO(x)] - En donde 'x' es la posición en el orden en el que fueron enviados los parámetros al momento de ejecutar los procesos de cálculo.
+              * [BUFFER(x)] - Constante que permite obtener un valor desde un almacenamiento temporal de salida que se tiene para variables del cálculo, 
+              en donde 'x' representa la posición en el orden en el que fueron enviados los parámetros al almacenamiento temporal o Buffer.
+                ["BUFFER" REMARKS:
+                Se utiliza principalmente para enviar valores resultantes del cálculo, que se requieran almacenar en la base de datos, como el contrato o el punto de suministro.
+                ]
+            ]
+            -->
+            <equivalencia valorOriginal="" valorNuevo="" />
+          </equivalencias>
+        </variable>
+      </variables>
+    </calculo>
+  </calculos>
+</configuracion>

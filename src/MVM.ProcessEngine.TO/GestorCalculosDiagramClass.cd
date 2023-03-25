@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MVM.ProcessEngine.TO.FuenteTO">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Parametros" Type="MVM.ProcessEngine.TO.ParametroTO" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="1.148" />
+        <Point X="0.167" Y="1.148" />
+        <Point X="0.167" Y="6.25" />
+        <Point X="3.75" Y="6.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAgAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>FuenteTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Parametros" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.ArchivoTO">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>ArchivoTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.RepositorioTO">
+    <Position X="0.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAIAAAAgAAJAIA=</HashCode>
+      <FileName>RepositorioTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.ServicioTO">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>ServicioTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.CalculoTO">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAgAAAAABAgAAAAAAEBEAAAAQAAAAQAAA=</HashCode>
+      <FileName>CalculoTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Grupo" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Variables" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.VariableTO">
+    <Position X="11.25" Y="1" Width="1.75" />
+    <AssociationLine Name="Fuente" Type="MVM.ProcessEngine.TO.FuenteTO" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.438" Y="1" />
+        <Point X="12.438" Y="0.75" />
+        <Point X="4.5" Y="0.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAkgwAAAGAAgAJAAAAAAAgAAABAAAAgAEA=</HashCode>
+      <FileName>VariableTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Fuente" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Equivalencias" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.EquivalenciaTO">
+    <Position X="11.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EquivalenciaTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.ParametroTO">
+    <Position X="3.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAACAAgAIEAAAAAAAAAAAAAAAgAEA=</HashCode>
+      <FileName>ParametroTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.ConfiguracionTO">
+    <Position X="7.5" Y="4.25" Width="1.75" />
+    <AssociationLine Name="Calculos" Type="MVM.ProcessEngine.TO.CalculoTO" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="4.748" />
+        <Point X="7.125" Y="4.748" />
+        <Point X="7.125" Y="2.555" />
+        <Point X="8.75" Y="2.555" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Fuentes" Type="MVM.ProcessEngine.TO.FuenteTO" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="5.379" />
+        <Point X="6.833" Y="5.379" />
+        <Point X="6.833" Y="1.25" />
+        <Point X="4.5" Y="1.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQABQgABQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConfiguracionTO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Grupos" />
+      <Property Name="Calculos" />
+      <Property Name="Fuentes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.ResultadoProcesoTO">
+    <Position X="11" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAIAAAAAAAAAAAIAAAAAg=</HashCode>
+      <FileName>ResultadoProcesoTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.GrupoTO">
+    <Position X="8.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>GrupoTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVM.ProcessEngine.TO.MensajeProcesoTO">
+    <Position X="6.25" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAIA=</HashCode>
+      <FileName>MensajeProcesoTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="MVM.ProcessEngine.TO.DireccionValor" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.TipoDato" Collapsed="true">
+    <Position X="4" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAgAAAgQAAAAAAAAAAAAgwAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.Proveedor" Collapsed="true">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAQAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.Condicional" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.Operador" Collapsed="true">
+    <Position X="0.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAACAAAAAAAAAIAAAAAAAAgAAAAAEAAAgAgAAAAgAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.TipoProcesamiento" Collapsed="true">
+    <Position X="4" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAQAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.EstadoProceso" Collapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEACAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.TipoArchivo" Collapsed="true">
+    <Position X="2.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAQAAAAgAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.VersionExcel" Collapsed="true">
+    <Position X="2.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MVM.ProcessEngine.TO.TipoRedondeo" Collapsed="true">
+    <Position X="0.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAgAgAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>Declaración de objetos de negocio</description>
+
+  <!-- Factory para el acceso a datos -->
+  <object id="SQL" type="OC.GestorCalculos.DataAccess.GestorDatosSQL, OC.GestorCalculos.DataAccess" />
+  <object id="Oracle" type="OC.GestorCalculos.DataAccess.GestorDatosOracle, OC.GestorCalculos.DataAccess" />
+
+  <!-- manager para manejo de la bitácora de mensajes -->
+  <object id="mensajesManager" type="OC.GestorCalculos.Plugin.SIIMADConfiguracionPlugin.SIIMADMensajesManager, OC.GestorCalculos.Plugin">
+  </object>
+
+  <!-- Servicio que hospeda el proceso de cálculo -->
+  <object id="CalculoTarget" type="OC.GestorCalculos.Core.CalculoService, OC.GestorCalculos.Core">
+  </object>
+
+  <object id="CalculoService" type="Spring.Aop.Framework.ProxyFactoryObject">
+    <property name="target">
+      <ref object="CalculoTarget"/>
+    </property>
+    <property name="interceptorNames">
+      <list>
+        <value>MethodInterceptor</value>
+      </list>
+    </property>
+  </object>
+</objects>
